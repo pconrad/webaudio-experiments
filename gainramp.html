@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>WebAudio Experiments - Simple Attack Decay Envelope</title>
+<LINK REL="SHORTCUT ICON" HREF="http://www.softsynth.com/favicon.ico" />
+<link href="custom-v27.css" rel="stylesheet" type="text/css">
+<link href="aardvark-v27.css" rel="stylesheet" type="text/css">
+<!-- extra head -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-750748-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+<body>
+<div id="container">
+<div id="header">
+  <div id="leftheader"><a href="http://www.softsynth.com/"> <img src="/images/softsynth_logo.png" width="200" height="100" border="0"></a></div>
+  <div id="rightheader">
+    <!-- Google CSE Search Box Begins -->
+    <form id="searchbox_015572705897646109065:fp6grb7yfpk" action="http://www.google.com/cse">
+      <input type="hidden" name="cx" value="015572705897646109065:fp6grb7yfpk" />
+      <input name="q" type="text" size="40" />
+      <input type="submit" name="sa" value="Search" />
+      <input type="hidden" name="cof" value="FORID:0" />
+    </form>
+    <script type="text/javascript" src="http://www.google.com/coop/cse/brand?form=searchbox_015572705897646109065%3Afp6grb7yfpk"></script>
+    <!-- Google CSE Search Box Ends -->
+  </div>
+  <div id="midheader">
+    <h1>SoftSynth</h1>
+    <h2>... music and computers ...</h2>
+  </div>
+  <br class="clearfloat"/>
+</div>
+<!-- Left Side Navigation ******************************** -->
+<div id="leftside">
+  <div id="leftside_inner"> <ul>
+<li><a href="/index.php">Home</a>
+</li><li><a href="/products.php">Products</a>
+</li><li><a href="/jsyn/index.php">JSyn</a>
+</li><li><a href="/pforth/index.php">pForth</a>
+</li><li><a href="/music/index.php">Music</a>
+</li><li><a href="/news/index.php">News</a>
+</li><li><a href="/links/index.php">Links</a>
+</li><li><a href="/contacts.php">Contact&nbsp;Us</a>
+</li><li><a href="/aboutus.php">About&nbsp;Us</a>
+</li></ul>
+ </div>
+</div>
+<!-- Right Side Display ******************************** -->
+<div id="rightside">
+  <div id="rightside_inner">
+  
+  <h3>Projects</h3>
+<table  border="1">
+  <tr>
+    <td><a href="/jsyn/">JSyn</a> - modular synthesis API for Java.</td>
+  </tr>
+  <tr>
+    <td><a href="http://www.algomusic.com/jmsl/" target="_blank">JMSL</a> - Java Music Specification Language</td>
+  </tr>
+  <tr>
+    <td><a href="http://www.portaudio.com/" target="_blank">PortAudio</a> - cross platform audio I/O API for 'C'</td>
+  </tr>
+</table>
+<!-- data for adsense -->
+    <script type="text/javascript"><!--
+	  google_ad_client = "pub-1426437777355396";
+	  google_ad_width = 160;
+	  google_ad_height = 600;
+	  google_ad_format = "160x600_as";
+	  google_ad_type = "text";
+	  google_ad_channel ="7963716298";
+	  google_color_border = "B0E0E6";
+	  google_color_bg = "FFFFFF";
+	  google_color_link = "000000";
+	  google_color_url = "336699";
+	  google_color_text = "333333";
+//--></script>
+<!--
+    <script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+-->
+  </div>
+</div>
+<div id="content">
+<!-- Begin Content DIV ******************************** -->
+<p class="navbar">Web Audio Experiments:
+&nbsp;<a href="/webaudio/index.php">Home </a>&nbsp;|
+&nbsp;<a href="/webaudio/tone.php">Tone </a>&nbsp;|
+&nbsp;<a class="current_link" href="/webaudio/gainramp.php">GainRamp </a>&nbsp;|
+</p>
+<h1>WebAudio Experiments</h1>
+<p>Requires Chrome browser for support of proposed <a href="https://dvcs.w3.org/hg/audio/raw-file/tip/webaudio/specification.html" target="_blank">Web Audio API</a>.</p>
+
+
+<script type="text/javascript" src="gainramp.js"></script>
+
+<h2>Attack Decay Envelope using AudioGain</h2>
+<p>Use an AudioGainNode to smoothly raise and lower the volume of a sound.</p>
+
+<p>Roll mouse over the paragraphs below to start and stop sound.</p>
+<div style="border: 1px solid blue;" onmouseover="startTone(1)" onmouseout="stopTone(1)"><p>Mode=1, linearRampToValueAtTime() for attack and decay</p></div><div>&nbsp;</div>
+<div style="border: 1px solid blue;" onmouseover="startTone(2)" onmouseout="stopTone(2)"><p>Mode=2, linearRampToValueAtTime() up and down several times, linear down</p></div><div>&nbsp;</div>
+<div style="border: 1px solid blue;" onmouseover="startTone(3)" onmouseout="stopTone(3)"><p>Mode=3, linearRampToValueAtTime() for attack, exponentialRampToValueAtTime() for decay, setTargetValueAtTime() for release</p></div><div>&nbsp;</div>
+<div style="border: 1px solid blue;" onmouseover="startTone(4)" onmouseout="stopTone(4)"><p>Mode=4, setTargetValueAtTime() for attack and release</p></div><div>&nbsp;</div>
+<p>Look in the code below to see how the test modes are applied.</p>
+
+<code><span style="color: #000000">
+<br />//&nbsp;Example&nbsp;showing&nbsp;how&nbsp;to&nbsp;produce&nbsp;a&nbsp;tone&nbsp;using&nbsp;Web&nbsp;Audio&nbsp;API.<br />var&nbsp;context;<br />var&nbsp;jsProcessor&nbsp;=&nbsp;0;<br /><br /><br />//&nbsp;Variables&nbsp;used&nbsp;to&nbsp;control&nbsp;the&nbsp;tone&nbsp;generator.<br />var&nbsp;phase&nbsp;=&nbsp;0.0;<br />var&nbsp;baseFrequency&nbsp;=&nbsp;440.0;<br />var&nbsp;kSampleRate&nbsp;=&nbsp;44100.0;<br />var&nbsp;kBufferSIze&nbsp;=&nbsp;1024;&nbsp;//&nbsp;must&nbsp;be&nbsp;power&nbsp;of&nbsp;2<br />var&nbsp;phaseIncrement&nbsp;=&nbsp;2.0&nbsp;*&nbsp;Math.PI&nbsp;*&nbsp;baseFrequency&nbsp;/&nbsp;kSampleRate;<br />var&nbsp;kTwoPi&nbsp;=&nbsp;2.0&nbsp;*&nbsp;Math.PI;<br />var&nbsp;soundEnabled&nbsp;=&nbsp;false;<br /><br />//&nbsp;Create&nbsp;an&nbsp;AudioCOntext&nbsp;and&nbsp;a&nbsp;JavaScriptNode.<br />function&nbsp;initAudio()<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;if(&nbsp;window.webkitAudioContext&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;context&nbsp;=&nbsp;new&nbsp;webkitAudioContext();<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;This&nbsp;AudioNode&nbsp;will&nbsp;generate&nbsp;a&nbsp;tone.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Node&nbsp;has&nbsp;zero&nbsp;inputs&nbsp;and&nbsp;one&nbsp;output.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jsProcessor&nbsp;=&nbsp;context.createJavaScriptNode(kBufferSIze,&nbsp;0,&nbsp;1);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jsProcessor.onaudioprocess&nbsp;=&nbsp;process;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode&nbsp;=&nbsp;context.createGainNode();<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Connect&nbsp;our&nbsp;process&nbsp;to&nbsp;the&nbsp;mixer&nbsp;of&nbsp;the&nbsp;context.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;jsProcessor.connect(gainNode);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.connect(context.destination);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.value&nbsp;=&nbsp;0.0;<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("Sorry.&nbsp;Web&nbsp;Audio&nbsp;API&nbsp;not&nbsp;supported.&nbsp;Try&nbsp;using&nbsp;the&nbsp;Google&nbsp;Chrome&nbsp;browser.");<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />//&nbsp;This&nbsp;function&nbsp;will&nbsp;be&nbsp;called&nbsp;repeatedly&nbsp;to&nbsp;fill&nbsp;an&nbsp;audio&nbsp;buffer&nbsp;and<br />//&nbsp;generate&nbsp;sound.<br />function&nbsp;process(event)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Get&nbsp;array&nbsp;associated&nbsp;with&nbsp;the&nbsp;output&nbsp;port.<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;outputArray&nbsp;=&nbsp;event.outputBuffer.getChannelData(0);<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;n&nbsp;=&nbsp;outputArray.length;<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;for&nbsp;(var&nbsp;i&nbsp;=&nbsp;0;&nbsp;i&nbsp;&lt;&nbsp;n;&nbsp;++i)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Generate&nbsp;a&nbsp;sine&nbsp;wave.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;sample&nbsp;=&nbsp;Math.sin(phase);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputArray[i]&nbsp;=&nbsp;sample&nbsp;*&nbsp;0.6;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Increment&nbsp;and&nbsp;wrap&nbsp;phase.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phase&nbsp;+=&nbsp;phaseIncrement;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(phase&nbsp;&gt;&nbsp;kTwoPi)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;phase&nbsp;-=&nbsp;kTwoPi;<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />//&nbsp;Experiment&nbsp;with&nbsp;various&nbsp;ways&nbsp;of&nbsp;applying&nbsp;an&nbsp;envelope.<br />function&nbsp;startTone(&nbsp;mode&nbsp;)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;now&nbsp;=&nbsp;context.currentTime;<br />&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.cancelScheduledValues(&nbsp;now&nbsp;);<br />&nbsp;&nbsp;&nbsp;&nbsp;<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Anchor&nbsp;beginning&nbsp;of&nbsp;ramp&nbsp;at&nbsp;current&nbsp;value.<br />&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.setValueAtTime(gainNode.gain.value,&nbsp;now);<br />&nbsp;&nbsp;&nbsp;&nbsp;if(&nbsp;mode&nbsp;==&nbsp;1&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Ramp&nbsp;slowly&nbsp;up&nbsp;with&nbsp;a&nbsp;1&nbsp;second&nbsp;duration.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(1.0,&nbsp;now&nbsp;+&nbsp;1.0);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;2&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Ramp&nbsp;up&nbsp;and&nbsp;down.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(1.0,&nbsp;now&nbsp;+&nbsp;0.5);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(0.0,&nbsp;now&nbsp;+&nbsp;1.0);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(1.0,&nbsp;now&nbsp;+&nbsp;1.5);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(0.0,&nbsp;now&nbsp;+&nbsp;2.0);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(1.0,&nbsp;now&nbsp;+&nbsp;2.5);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;3&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Ramp&nbsp;quickly&nbsp;up.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(1.0,&nbsp;now&nbsp;+&nbsp;0.1);<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Then&nbsp;decay&nbsp;down&nbsp;to&nbsp;a&nbsp;sustain&nbsp;level.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.exponentialRampToValueAtTime(0.2,&nbsp;now&nbsp;+&nbsp;0.3);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;4&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.setTargetValueAtTime(1.0,&nbsp;now,&nbsp;0.2&nbsp;);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />function&nbsp;stopTone(&nbsp;mode&nbsp;)<br />{<br />&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;now&nbsp;=&nbsp;context.currentTime;<br />&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.cancelScheduledValues(&nbsp;now&nbsp;);<br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Anchor&nbsp;beginning&nbsp;of&nbsp;ramp&nbsp;at&nbsp;current&nbsp;value.<br />&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.setValueAtTime(gainNode.gain.value,&nbsp;now);<br />&nbsp;&nbsp;&nbsp;&nbsp;if(&nbsp;mode&nbsp;==&nbsp;1&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Ramp&nbsp;down.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(0.0,&nbsp;now&nbsp;+&nbsp;0.5);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;2&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.linearRampToValueAtTime(0.0,&nbsp;now&nbsp;+&nbsp;0.5);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;3&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;Third&nbsp;value&nbsp;controls&nbsp;how&nbsp;slow&nbsp;the&nbsp;value&nbsp;decays.<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.setTargetValueAtTime(0.0,&nbsp;now,&nbsp;0.7);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />&nbsp;&nbsp;&nbsp;&nbsp;else&nbsp;if(&nbsp;mode&nbsp;==&nbsp;4&nbsp;)<br />&nbsp;&nbsp;&nbsp;&nbsp;{<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gainNode.gain.setTargetValueAtTime(0.0,&nbsp;now,&nbsp;0.7);<br />&nbsp;&nbsp;&nbsp;&nbsp;}<br />}<br /><br />//&nbsp;init&nbsp;once&nbsp;the&nbsp;page&nbsp;has&nbsp;finished&nbsp;loading.<br />window.onload&nbsp;=&nbsp;initAudio;<br /></span>
+</code>
+<br class="clearfloat"/>
+<!-- end content div ******************************** -->
+</div>
+
+<div id="footer">
+  <p class="copyright">(C) 1997-2012 Mobileer Inc - All Rights Reserved - <a href="/contacts.php">Contact Us</a></p>
+</div>
+<!-- end container div ******************************** -->
+</div>
+<!-- Google analytics go here. -->
+</body>
+</html>
